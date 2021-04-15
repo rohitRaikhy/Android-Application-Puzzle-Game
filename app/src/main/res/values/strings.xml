@@ -2,4 +2,10 @@
     <string name="app_name">puzzle_game</string>
     <string name="username">username</string>
     <string name="password">password</string>
+    <string name="register">register</string>
+    <string name="gameName">My Beautiful Dark Twisted Fantasy in Dungeons</string>
+    <string name="welcomeMessage">Welcome to the game!</string>
+    <string name="playGame">Play Game</string>
+    <string name="profile">Profile</string>
+    <string name="friendsList">Friends List</string>
 </resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+    <activity
+        android:id="@+id/login"
+        android:name="edu.neu.madcourse.puzzle_game.login"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login">
+    <action
+        android:id="@+id/action_blankFragment_to_blankFragment2"
+        app:destination="@id/homePage3" />
+    </activity>
+    <activity
+        android:id="@+id/homePage3"
+        android:name="edu.neu.madcourse.puzzle_game.HomePage"
+        android:label="activity_home_page"
+        tools:layout="@layout/activity_home_page" />
+</navigation>

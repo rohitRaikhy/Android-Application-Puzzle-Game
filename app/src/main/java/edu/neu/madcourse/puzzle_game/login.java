@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,7 +33,6 @@ public class login extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,36 +41,28 @@ public class login extends AppCompatActivity {
         emailText = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
         signIn = findViewById(R.id.sign_in_button);
-
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    switch (view.getId()) {
-                        case R.id.sign_in_button:
-                            signIn();
-                            break;
-                        // ...
-                    }
+                switch (view.getId()) {
+                    case R.id.sign_in_button:
+                        signIn();
+                        break;
+                    // ...
                 }
+            }
         });
-
-
-
-
-        // Configure sign-in to request the user's ID, email address, and basic
-// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
     }
 
+    /**
+     * Sign in functionality for google oauth firebase.
+     */
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -79,38 +71,50 @@ public class login extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
     }
 
-
+    /**
+     * Handles the result of the sign in google oath firebase.
+     *
+     * @param completedTask the signed in user account google oath firebase.
+     */
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Log.d("Sign-In", "firebaseAuthWithGoogle:" + account.getId());
-            // Signed in successfully, show authenticated UI.
+            Toast toast = Toast.makeText(getApplicationContext(), "Sign in successful.",
+                    Toast.LENGTH_SHORT);
+            toast.show();
+
+            //TODO: If the sign in is successful then add data of user to the home screen intent/profile intent
+            // Open a new activity and go to the main page.
+            //TODO: Add to the activity user info
+            googleSignInActivity(account);
+
         } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
+            Toast toast = Toast.makeText(getApplicationContext(), "Sign in failed. Please " +
+                    "try again.", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
-
 
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
+    /**
+     * sign in button functionality for google oath.
+     *
+     * @param idToken the id token of the use google oath firebase.
+     */
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -118,23 +122,23 @@ public class login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("Sign-in", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("Fail", "signInWithCredential:failure", task.getException());
                         }
                     }
                 });
     }
 
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        // Check for existing Google Sign In account, if the user is already signed in
-//// the GoogleSignInAccount will be non-null.
-//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//    }
+    /**
+     * Used to open a new intent when google auth sign in succeeds.
+     */
+    private void googleSignInActivity(GoogleSignInAccount account) {
+        Intent intent = new Intent(this, HomePage.class);
+        intent.putExtra("username",  account.getDisplayName());
+        intent.putExtra("email", account.getEmail());
+        intent.putExtra("account", account.getAccount());
+        startActivity(intent);
+    }
 }
