@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -27,19 +27,28 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class login extends AppCompatActivity {
 
-    private TextView emailText;
-    private TextView password;
+//    private TextView emailText;
+//    private TextView password;
     private SignInButton signIn;
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
 
+    private EditText signInEmail;
+    private EditText signInPw;
+    private String email;
+    private String password;
+
+    private final String TAG = "CUSTOM MSG: ";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailText = findViewById(R.id.editTextTextPersonName);
-        password = findViewById(R.id.editTextTextPassword);
+
+//        emailText = findViewById(R.id.signInEmail);
+//        password = findViewById(R.id.signInPw);
         signIn = findViewById(R.id.sign_in_button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +66,9 @@ public class login extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
+
+        signInEmail = findViewById(R.id.signInEmail);
+        signInPw = findViewById(R.id.signInPw);
 
     }
 
@@ -110,6 +122,7 @@ public class login extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
+
     /**
      * sign in button functionality for google oath.
      *
@@ -151,13 +164,38 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Use Firebase Auth to log into the user account
+     */
+    public void logInOnClick(View view) {
 
+        email = signInEmail.getText().toString();
+        password = signInPw.getText().toString();
 
-
-
-
-
-
-
+        if (email.length() == 0 || password.length() == 0) {
+            Toast.makeText(login.this, "Empty credentials are not allowed.",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+//                                TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+//                                welcomeMsg.setText("Welcome: " + user.getEmail());
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(login.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
 
 }
