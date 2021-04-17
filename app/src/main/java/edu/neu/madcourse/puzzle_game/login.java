@@ -141,4 +141,16 @@ public class login extends AppCompatActivity {
         intent.putExtra("account", account.getAccount());
         startActivity(intent);
     }
+
+//    public void goToRegister() {
+//        Intent intent = new Intent(this, RegisterActivity.class);
+//        startActivity(intent);
+//    }
+
+
+
+
+
+
+
 }
