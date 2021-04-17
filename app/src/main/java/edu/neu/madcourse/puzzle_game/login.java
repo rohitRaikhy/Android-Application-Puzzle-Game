@@ -142,10 +142,17 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void goToRegister() {
-//        Intent intent = new Intent(this, RegisterActivity.class);
-//        startActivity(intent);
-//    }
+
+    /**
+     * Navigate to the Register page when the register button is clicked
+     */
+    public void goToRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+
+
 
 
 
