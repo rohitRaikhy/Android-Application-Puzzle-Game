@@ -8,4 +8,6 @@
     <string name="playGame">Play Game</string>
     <string name="profile">Profile</string>
     <string name="friendsList">Friends List</string>
+    <string name="login">Login</string>
+    <string name="gameNameHomeScreen">Puzzle App</string>
 </resources>
