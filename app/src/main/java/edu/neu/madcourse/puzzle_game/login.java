@@ -155,7 +155,6 @@ public class login extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     /**
      * Navigate to the Register page when the register button is clicked
      */
@@ -163,6 +162,7 @@ public class login extends AppCompatActivity {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
 
     /**
      * Use Firebase Auth to log into the user account
@@ -185,8 +185,8 @@ public class login extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-//                                TextView welcomeMsg = findViewById(R.id.welcomeMsg);
-//                                welcomeMsg.setText("Welcome: " + user.getEmail());
+                                TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+                                welcomeMsg.setText("Welcome " + user.getEmail());
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -197,5 +197,22 @@ public class login extends AppCompatActivity {
                     });
         }
     }
+
+    /**
+     * Navigate to the profile page when the profile button is clicked
+     */
+    public void goToProfile(View view) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuth.signOut();
+    }
+
+
 
 }
