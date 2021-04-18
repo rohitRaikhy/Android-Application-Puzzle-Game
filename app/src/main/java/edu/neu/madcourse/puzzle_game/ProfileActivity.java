@@ -88,7 +88,6 @@ public class ProfileActivity extends AppCompatActivity {
         User updatedUser = new User(newUsername, newEmail, userInstance.getUid());
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-        System.out.println(instanceId);
         ref.child("Users").child(instanceId).setValue(updatedUser);
     }
 
