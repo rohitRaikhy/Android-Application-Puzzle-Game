@@ -14,6 +14,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -59,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-//                                registerOnDatabase(username, email, user.getUid());
+                                registerOnDatabase(username, email, user.getUid());
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -68,6 +72,23 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+        }
+
+    }
+
+    /**
+     * Push the user data to the database once a new user account is registered
+     */
+    private void registerOnDatabase(String username, String email, String uid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("email", email);
+        map.put("uid", uid);
+
+        if (username.isEmpty() || email.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Empty credentials are not allowed.", Toast.LENGTH_SHORT).show();
+        } else {
+            FirebaseDatabase.getInstance().getReference().child("Users").push().setValue(map);
         }
 
     }
