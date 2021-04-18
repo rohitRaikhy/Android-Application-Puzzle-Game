@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,7 @@ import android.widget.Button;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +25,7 @@ public class HomePage extends AppCompatActivity {
     private Button messengerButton;
     private String username;
     private FirebaseAuth mAuth;
+    private String profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class HomePage extends AppCompatActivity {
 
         messengerButton = findViewById(R.id.messenger);
         username = getIntent().getStringExtra("username");
+        profilePic = getIntent().getStringExtra("profileImage");
+        System.out.println("THIS IS PIC " + profilePic);
 
         System.out.println("THIS IS USERNAME: " + getIntent().getStringExtra("username"));
 
@@ -68,6 +73,7 @@ public class HomePage extends AppCompatActivity {
     private void openMessenger() {
         Intent intent = new Intent(HomePage.this, MessagingActivity.class);
         intent.putExtra("username", username);
+        intent.putExtra("profilePic", profilePic);
         startActivity(intent);
     }
 
