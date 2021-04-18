@@ -57,6 +57,13 @@
             android:ems="10"
             android:hint="Enter your mobile number"
             android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="updateOnClick"
+            android:text="update" />
     </LinearLayout>
 
     <ImageView

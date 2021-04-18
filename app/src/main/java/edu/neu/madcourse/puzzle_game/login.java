@@ -119,9 +119,12 @@ public class login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+            welcomeMsg.setText("Welcome " + user.getEmail());
+        }
     }
-
 
     /**
      * sign in button functionality for google oath.
@@ -207,10 +210,10 @@ public class login extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void signOutOnClick(View view) {
         mAuth.signOut();
+        TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+        welcomeMsg.setText("");
     }
 
 

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,9 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText emailFld;
     private EditText mobile;
     private String username;
+
+    private User userInstance;
+    private String instanceId;
 
 
     @Override
@@ -57,13 +61,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                     User userData = dataSnapshot.getValue(User.class);
 
-                    System.out.println(uid);
-                    System.out.println(userData.getUid());
-                    System.out.println(userData.getEmail());
-
                     if (userData.getUid().equals(uid)) {
                         username = userData.getUsername();
                         usernameFld.setText(username);
+
+                        userInstance = userData;
+                        instanceId = dataSnapshot.getKey();
                     }
                 }
 
@@ -76,6 +79,19 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+
+    public void updateOnClick(View view) {
+
+        String newUsername = usernameFld.getText().toString();
+        String newEmail = emailFld.getText().toString();
+
+        User updatedUser = new User(newUsername, newEmail, userInstance.getUid());
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        System.out.println(instanceId);
+        ref.child("Users").child(instanceId).setValue(updatedUser);
+    }
+
 
 
 }
