@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class login extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class login extends AppCompatActivity {
         emailText = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
         signIn = findViewById(R.id.sign_in_button);
+        loginButton = findViewById(R.id.loginButton);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +61,27 @@ public class login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signInWithEmailAndPassword(emailText.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    loginEmailPass();
+                                }
+                                else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Sign in failed. Please " +
+                                    "try again.", Toast.LENGTH_SHORT);
+                             toast.show();
+                            }
+                            }
+                                       });
+            }
+        });
     }
+
 
     /**
      * Sign in functionality for google oauth firebase.
@@ -141,5 +164,14 @@ public class login extends AppCompatActivity {
         intent.putExtra("account", account.getAccount());
         intent.putExtra("profileImage", account.getPhotoUrl());
         startActivity(intent);
+    }
+
+    /**
+     * login with email and pass, move intent to home page if success.
+     */
+    private void loginEmailPass() {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+        finish();
     }
 }

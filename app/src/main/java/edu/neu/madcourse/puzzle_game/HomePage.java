@@ -31,13 +31,13 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-
+        mAuth = FirebaseAuth.getInstance();
         messengerButton = findViewById(R.id.messenger);
         username = getIntent().getStringExtra("username");
         profilePic = getIntent().getStringExtra("profileImage");
-        System.out.println("THIS IS PIC " + profilePic);
-
-        System.out.println("THIS IS USERNAME: " + getIntent().getStringExtra("username"));
+//        System.out.println("THIS IS PIC " + profilePic);
+//
+//        System.out.println("THIS IS USERNAME: " + getIntent().getStringExtra("username"));
 
         messengerButton.setOnClickListener(new View.OnClickListener() {
             @Override
