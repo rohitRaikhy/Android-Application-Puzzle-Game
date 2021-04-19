@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Puzzle_game">
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MessagingActivity"></activity>
         <activity android:name=".login" />
         <activity android:name=".HomePage" />
