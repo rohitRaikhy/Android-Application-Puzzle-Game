@@ -155,6 +155,7 @@ public class login extends AppCompatActivity {
         intent.putExtra("username",  account.getDisplayName());
         intent.putExtra("email", account.getEmail());
         intent.putExtra("account", account.getAccount());
+        intent.putExtra("profileImage", account.getPhotoUrl());
         startActivity(intent);
     }
 

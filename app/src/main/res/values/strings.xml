@@ -8,4 +8,8 @@
     <string name="playGame">Play Game</string>
     <string name="profile">Profile</string>
     <string name="friendsList">Friends List</string>
+    <string name="login">Login</string>
+    <string name="gameNameHomeScreen">Puzzle App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
