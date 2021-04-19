@@ -55,5 +55,6 @@ dependencies {
 
     // add this library
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
 }
 

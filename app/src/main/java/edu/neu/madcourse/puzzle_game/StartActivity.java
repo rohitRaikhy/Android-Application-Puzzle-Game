@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class StartActivity extends AppCompatActivity {
 
     private Button signInButton;
+    private Button registerButton;
     FirebaseUser user;
 
     @Override
@@ -22,6 +23,7 @@ public class StartActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.login);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        registerButton = findViewById(R.id.Register);
 
         // check to see if the user is null
         if(user != null) {
@@ -34,6 +36,14 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StartActivity.this, login.class);
+                startActivity(intent);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StartActivity.this, Register.class);
                 startActivity(intent);
             }
         });

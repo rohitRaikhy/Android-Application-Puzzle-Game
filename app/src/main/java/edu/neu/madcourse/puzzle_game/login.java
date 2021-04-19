@@ -33,6 +33,7 @@ public class login extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
+    private Button loginButton;
 
     private EditText signInEmail; // input field for user email
     private EditText signInPw; // input field for user password
@@ -50,6 +51,7 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         signIn = findViewById(R.id.sign_in_button);
+        loginButton = findViewById(R.id.loginButton);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +69,30 @@ public class login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signInWithEmailAndPassword(emailText.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    loginEmailPass();
+                                }
+                                else {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Sign in failed. Please " +
+                                    "try again.", Toast.LENGTH_SHORT);
+                             toast.show();
+                            }
+                            }
+                                       });
+            }
+        });
         signInEmail = findViewById(R.id.signInEmail);
         signInPw = findViewById(R.id.signInPw);
         logInBtn = findViewById(R.id.logInBtn);
     }
+
 
     /**
      * Sign in functionality for google oauth firebase.
@@ -160,6 +182,13 @@ public class login extends AppCompatActivity {
     }
 
     /**
+     * login with email and pass, move intent to home page if success.
+     */
+    private void loginEmailPass() {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+        finish();
+    }
      * Navigate to the Register page when the register button is clicked
      */
     public void goToRegister(View view) {
@@ -238,7 +267,5 @@ public class login extends AppCompatActivity {
 //        TextView welcomeMsg = findViewById(R.id.welcomeMsg);
 //        welcomeMsg.setText("");
 //    }
-
-
 
 }

@@ -9,15 +9,20 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -50,10 +55,26 @@ public class MessagingActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewpager = findViewById(R.id.view_pager);
         /**
-         * check to see if username is null
+         * check to see if username is null, if null then use username/email otherwise use
+         * third party auth service.
          */
         if(getIntent().getStringExtra("username") != null) {
             username.setText(getIntent().getStringExtra("username"));
+        } else {
+            String userId = firebaseUser.getUid();
+            // Change the username of the icon.
+            FirebaseDatabase.getInstance().getReference().child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    }
+                    else {
+                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                        username.setText(task.getResult().child("username").getValue().toString());
+                    }
+                }
+            });
         }
         /**
          * check to see if profile pic is null
@@ -62,10 +83,10 @@ public class MessagingActivity extends AppCompatActivity {
             profileImage.setImageResource(R.mipmap.ic_launcher);
         }
 
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragments(new ChatFeatureFragment(), "chats");
         viewPagerAdapter.addFragments(new UsersFragment(), "users");
-
         viewpager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewpager);
     }
@@ -87,6 +108,9 @@ public class MessagingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Todo: this does not work yet. Showing errors in the console.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
