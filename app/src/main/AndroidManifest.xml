@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Puzzle_game">
         <activity android:name=".Register"></activity>
-        <activity android:name=".MessagingActivity" />
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MessagingActivity"></activity>
         <activity android:name=".login" />
         <activity android:name=".HomePage" />
         <activity android:name=".StartActivity">

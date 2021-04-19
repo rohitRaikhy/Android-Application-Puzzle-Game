@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,20 +28,28 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class login extends AppCompatActivity {
 
-    private TextView emailText;
-    private TextView password;
+
     private SignInButton signIn;
     private GoogleSignInClient mGoogleSignInClient;
     private int RC_SIGN_IN = 0;
     private FirebaseAuth mAuth;
     private Button loginButton;
 
+    private EditText signInEmail; // input field for user email
+    private EditText signInPw; // input field for user password
+    private String email;
+    private String password;
+    private Button logInBtn; // email-based login button
+    private boolean logInStatus = false;
+
+    private final String TAG = "CUSTOM MSG: ";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailText = findViewById(R.id.editTextTextPersonName);
-        password = findViewById(R.id.editTextTextPassword);
+
         signIn = findViewById(R.id.sign_in_button);
         loginButton = findViewById(R.id.loginButton);
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +88,9 @@ public class login extends AppCompatActivity {
                                        });
             }
         });
+        signInEmail = findViewById(R.id.signInEmail);
+        signInPw = findViewById(R.id.signInPw);
+        logInBtn = findViewById(R.id.logInBtn);
     }
 
 
@@ -130,7 +141,11 @@ public class login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+            welcomeMsg.setText("Welcome " + user.getEmail());
+        }
     }
 
     /**
@@ -174,4 +189,83 @@ public class login extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+     * Navigate to the Register page when the register button is clicked
+     */
+    public void goToRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Control the login/sign-out flow
+     */
+    public void logInOnClick(View view) {
+        if (logInStatus) {
+            mAuth.signOut();
+            logInStatus = false;
+            logInBtn.setText("LOG IN");
+            // clear fields once signed out
+            signInEmail.setText("");
+            signInPw.setText("");
+            TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+            welcomeMsg.setText("");
+
+        } else {
+            logInHelper(view);
+        }
+    }
+
+    /**
+     * Use Firebase Auth to log into the user account
+     */
+    public void logInHelper(View view) {
+
+        email = signInEmail.getText().toString();
+        password = signInPw.getText().toString();
+
+        if (email.length() == 0 || password.length() == 0) {
+            Toast.makeText(login.this, "Empty credentials are not allowed.",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+                                welcomeMsg.setText("Welcome " + user.getEmail());
+
+                                logInBtn.setText("SIGN OUT");
+                                logInStatus = true;
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(login.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+
+    /**
+     * Navigate to the profile page when the profile button is clicked
+     */
+    public void goToProfile(View view) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+
+//    public void signOutOnClick(View view) {
+//        mAuth.signOut();
+//        TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+//        welcomeMsg.setText("");
+//    }
+
 }

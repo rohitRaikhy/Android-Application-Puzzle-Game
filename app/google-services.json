@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "646399812233",
-    "project_id": "puzzle-game-a88d5",
-    "storage_bucket": "puzzle-game-a88d5.appspot.com"
+    "project_number": "400717848910",
+    "project_id": "puzzle-game-e3110",
+    "storage_bucket": "puzzle-game-e3110.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:646399812233:android:531f9c92af3bb2fccb1c58",
+        "mobilesdk_app_id": "1:400717848910:android:eee872e694d957f84fbe1f",
         "android_client_info": {
           "package_name": "edu.neu.madcourse.puzzle_game"
         }
       },
       "oauth_client": [
         {
-          "client_id": "646399812233-jt8q4cnv01di545ukj3eoa8h3gbv8occ.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "edu.neu.madcourse.puzzle_game",
-            "certificate_hash": "b8b3e2bf17d61456375e1d35713bcb47a6aee81b"
-          }
-        },
-        {
-          "client_id": "646399812233-43jnpo6esc34qbn8mjq1rmslhiv287qu.apps.googleusercontent.com",
+          "client_id": "400717848910-1dkg49pppte6u2psbu16or6q0ie91rsc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvf_2nDpAsz2iDDAQAnKpuSD3KmjYXj3o"
+          "current_key": "AIzaSyCzUPWQ2ql0lNts7JiEbkfQVcJoiVT34uI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "646399812233-43jnpo6esc34qbn8mjq1rmslhiv287qu.apps.googleusercontent.com",
+              "client_id": "400717848910-1dkg49pppte6u2psbu16or6q0ie91rsc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
