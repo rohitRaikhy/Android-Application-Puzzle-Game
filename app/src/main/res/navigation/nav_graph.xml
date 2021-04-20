@@ -10,11 +10,11 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
     <activity
@@ -22,9 +22,9 @@
         android:name="edu.neu.madcourse.puzzle_game.login"
         android:label="activity_login"
         tools:layout="@layout/activity_login">
-    <action
-        android:id="@+id/action_blankFragment_to_blankFragment2"
-        app:destination="@id/homePage3" />
+        <action
+            android:id="@+id/action_blankFragment_to_blankFragment2"
+            app:destination="@id/homePage3" />
     </activity>
     <activity
         android:id="@+id/homePage3"
