@@ -28,7 +28,7 @@ The gameplay allows the user to choose between different difficulty levels of pu
 Users have the ability to chat with each other through the messaging service.
 
 
-![Screen Shot 2021-04-20 at 10 58 05 PM](https://user-images.githubusercontent.com/35156624/115469057-df628000-a22b-11eb-8c62-fb02b5a6da8d.png)
+![Screen Shot 2021-04-20 at 11 11 44 PM](https://user-images.githubusercontent.com/35156624/115470153-c78bfb80-a22d-11eb-8a08-406b3539bdc4.png)
 
 
 
