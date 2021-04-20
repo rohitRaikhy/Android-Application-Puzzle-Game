@@ -10,11 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Puzzle_game">
         <activity android:name=".Register"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MessagingActivity"></activity>
+        <activity android:name=".MessagingActivity" />
         <activity android:name=".login" />
         <activity android:name=".HomePage" />
+        <activity android:name=".PlayAgainActivity"/>
+        <activity android:name=".SelectPuzzleActivity"/>
+        <activity android:name=".PuzzleActivity"/>
+
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

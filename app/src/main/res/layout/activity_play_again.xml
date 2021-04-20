@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="PlayAgainActivity"
+    android:background="@drawable/dungeon">
+
+    <TextView
+        android:id="@+id/txt_result"
+        android:layout_width="267dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="72dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Game Over! Better Luck Next Time."
+        android:textColor="#ffa500"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_puzzle_lvl_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63" />
+
+    <Button
+        android:id="@+id/btn_play_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToSelectPuzzleActivity"
+        android:text="Play Again"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_result" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
