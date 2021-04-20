@@ -27,24 +27,24 @@ import edu.neu.madcourse.puzzle_game.R;
 
 public class UsersFragment extends Fragment {
 
-        private RecyclerView recyclerView;
-        private UserAdapter userAdapter;
-        private List<GameUser> mUsers;
+    private RecyclerView recyclerView;
+    private UserAdapter userAdapter;
+    private List<GameUser> mUsers;
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            mUsers = new ArrayList<>();
+        mUsers = new ArrayList<>();
 
-            readUsers();
+        readUsers();
 
-            return view;
-        }
+        return view;
+    }
 
     /**
      * Functionality to read users into recycler view.

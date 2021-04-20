@@ -42,19 +42,18 @@ public class Register extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register( usernameEditText.getText().toString(), emailEditText.getText().toString(),
+                register(usernameEditText.getText().toString(), emailEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         });
     }
 
 
-
     /**
      * Register user with email/password.
      *
      * @param username the username String.
-     * @param email the email String.
+     * @param email    the email String.
      * @param password the password String.
      */
     private void register(String username, String email, String password) {

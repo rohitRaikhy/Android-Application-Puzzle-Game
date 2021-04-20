@@ -18,12 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.madcourse.puzzle_game.Adapter.UserAdapter;
-import edu.neu.madcourse.puzzle_game.Model.Chat;
 import edu.neu.madcourse.puzzle_game.Model.ChatList;
 import edu.neu.madcourse.puzzle_game.Model.GameUser;
 import edu.neu.madcourse.puzzle_game.R;
@@ -79,7 +77,7 @@ public class ChatFeatureFragment extends Fragment {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     GameUser user = snap.getValue(GameUser.class);
                     for (ChatList chatList : usersList) {
-                        if(user.getId().equals(chatList.getId())) {
+                        if (user.getId().equals(chatList.getId())) {
                             mUsers.add(user);
                         }
                     }

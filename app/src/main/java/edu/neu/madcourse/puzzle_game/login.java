@@ -1,8 +1,5 @@
 package edu.neu.madcourse.puzzle_game;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.identity.SignInClient;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -70,14 +69,13 @@ public class login extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     loginEmailPass();
+                                } else {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Sign in failed. Please " +
+                                            "try again.", Toast.LENGTH_SHORT);
+                                    toast.show();
                                 }
-                                else {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Sign in failed. Please " +
-                                    "try again.", Toast.LENGTH_SHORT);
-                             toast.show();
                             }
-                            }
-                                       });
+                        });
             }
         });
     }
@@ -159,7 +157,7 @@ public class login extends AppCompatActivity {
      */
     private void googleSignInActivity(GoogleSignInAccount account) {
         Intent intent = new Intent(this, HomePage.class);
-        intent.putExtra("username",  account.getDisplayName());
+        intent.putExtra("username", account.getDisplayName());
         intent.putExtra("email", account.getEmail());
         intent.putExtra("account", account.getAccount());
         intent.putExtra("profileImage", account.getPhotoUrl());

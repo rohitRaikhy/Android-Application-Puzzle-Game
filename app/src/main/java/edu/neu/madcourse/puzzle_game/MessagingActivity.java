@@ -1,5 +1,12 @@
 package edu.neu.madcourse.puzzle_game;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,7 +48,7 @@ public class MessagingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
-        profileImage  = findViewById(R.id.profile_image);
+        profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         tabLayout = findViewById(R.id.tab_layout);
@@ -58,7 +57,7 @@ public class MessagingActivity extends AppCompatActivity {
          * check to see if username is null, if null then use username/email otherwise use
          * third party auth service.
          */
-        if(getIntent().getStringExtra("username") != null) {
+        if (getIntent().getStringExtra("username") != null) {
             username.setText(getIntent().getStringExtra("username"));
         } else {
             String userId = firebaseUser.getUid();
@@ -68,8 +67,7 @@ public class MessagingActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (!task.isSuccessful()) {
                         Log.e("firebase", "Error getting data", task.getException());
-                    }
-                    else {
+                    } else {
                         Log.d("firebase", String.valueOf(task.getResult().getValue()));
                         username.setText(task.getResult().child("username").getValue().toString());
                     }
@@ -79,7 +77,7 @@ public class MessagingActivity extends AppCompatActivity {
         /**
          * check to see if profile pic is null
          */
-        if(getIntent().getStringExtra("profilePic") == null) {
+        if (getIntent().getStringExtra("profilePic") == null) {
             profileImage.setImageResource(R.mipmap.ic_launcher);
         }
 
@@ -93,20 +91,21 @@ public class MessagingActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater= getMenuInflater();
+        MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     /**
      * TOdO This causes a crash, need to fix.
+     *
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == R.id.logout) {
+        if (item.getItemId() == R.id.logout) {
             mAuth.signOut();
             finish();
         }

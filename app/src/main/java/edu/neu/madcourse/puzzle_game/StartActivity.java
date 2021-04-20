@@ -1,20 +1,20 @@
 package edu.neu.madcourse.puzzle_game;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class StartActivity extends AppCompatActivity {
 
+    FirebaseUser user;
     private Button signInButton;
     private Button registerButton;
-    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class StartActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.Register);
 
         // check to see if the user is null
-        if(user != null) {
+        if (user != null) {
             Intent intent = new Intent(StartActivity.this, HomePage.class);
             startActivity(intent);
             finish();
