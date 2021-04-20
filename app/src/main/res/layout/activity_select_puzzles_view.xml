@@ -4,63 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dungeon"
-    tools:context=".HomePage">
+    tools:context="PuzzleActivity"
+    android:background="@drawable/dungeon">
 
     <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="100dp"
+        android:id="@+id/txt_levels"
+        android:layout_width="201dp"
+        android:layout_height="82dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/welcomeMessage"
+        android:gravity="center"
+        android:text="Select Your Puzzle"
         android:textColor="#ffa500"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_puzzle_lvl_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_puzzle_lvl_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="156dp"
-        android:onClick="goToSelectPuzzleActivity"
-        android:text="@string/playGame"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:text="Puzzle 1 ( 8 x 8 )"
+        app:layout_constraintBottom_toTopOf="@+id/btn_puzzle_lvl_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_levels" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_puzzle_lvl_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="156dp"
-        android:text="@string/profile"
-        app:layout_constraintBottom_toTopOf="@+id/messenger"
+        android:text="Puzzle 2 ( 10 x 10 )"
+        app:layout_constraintBottom_toTopOf="@+id/btn_puzzle_lvl_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_puzzle_lvl_1" />
 
     <Button
-        android:id="@+id/messenger"
+        android:id="@+id/btn_puzzle_lvl_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="156dp"
-        android:text="@string/friendsList"
+        android:text="Puzzle 3 ( 12 x 12 )"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_puzzle_lvl_2"
+        app:layout_constraintVertical_bias="0.118" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
