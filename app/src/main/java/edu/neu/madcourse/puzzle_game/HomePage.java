@@ -70,4 +70,8 @@ public class HomePage extends AppCompatActivity {
     }
 
 
+    public void goToSelectPuzzleActivity(View view) {
+        Intent intent = new Intent(this, SelectPuzzleActivity.class);
+        startActivity(intent);
+    }
 }
