@@ -35,10 +35,6 @@ public class HomePage extends AppCompatActivity {
         messengerButton = findViewById(R.id.messenger);
         username = getIntent().getStringExtra("username");
         profilePic = getIntent().getStringExtra("profileImage");
-//        System.out.println("THIS IS PIC " + profilePic);
-//
-//        System.out.println("THIS IS USERNAME: " + getIntent().getStringExtra("username"));
-
         messengerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +66,9 @@ public class HomePage extends AppCompatActivity {
         mAuth.signOut();
     }
 
+    /**
+     * Opens up the messenger service.
+     */
     private void openMessenger() {
         Intent intent = new Intent(HomePage.this, MessagingActivity.class);
         intent.putExtra("username", username);

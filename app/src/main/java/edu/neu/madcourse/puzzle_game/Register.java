@@ -1,14 +1,14 @@
 package edu.neu.madcourse.puzzle_game;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,8 +38,6 @@ public class Register extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailRegister);
         passwordEditText = findViewById(R.id.passwordRegister);
         registerButton = findViewById(R.id.registerButton);
-
-        System.out.println("EMAIL" +  emailEditText.getText().toString());
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +92,7 @@ public class Register extends AppCompatActivity {
 
     /**
      * Moving to the Home Page intent if sign in succesfull.
+     * //TODO:need to add sign in
      */
     private void login() {
         Intent intent = new Intent(Register.this, HomePage.class);
