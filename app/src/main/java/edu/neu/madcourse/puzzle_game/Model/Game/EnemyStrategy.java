@@ -29,6 +29,9 @@ public class EnemyStrategy implements IStrategy {
         if (board.getMap()[to.getX()][to.getY()].geType() == CellType.TRAP) {
             return false;
         }
+        if (board.getMap()[to.getX()][to.getY()].geType() == CellType.ENEMY_SORCERER_AVATAR) {
+            return false;
+        }
         return true;
     }
 
