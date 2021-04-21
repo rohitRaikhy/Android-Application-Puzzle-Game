@@ -17,6 +17,7 @@ public class HomePage extends AppCompatActivity {
 
     private Button messengerButton;
     private String username;
+    private String email;
     private FirebaseAuth mAuth;
     private String profilePic;
 
@@ -27,6 +28,7 @@ public class HomePage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         messengerButton = findViewById(R.id.messenger);
         username = getIntent().getStringExtra("username");
+        email = getIntent().getStringExtra("email");
         profilePic = getIntent().getStringExtra("profileImage");
         messengerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +65,10 @@ public class HomePage extends AppCompatActivity {
      * Opens up the messenger service.
      */
     private void openMessenger() {
+        System.out.println("[HOMEPAGE] ***");
+        System.out.println(username);
+        System.out.println(email);
+
         Intent intent = new Intent(HomePage.this, MessagingActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("profilePic", profilePic);
@@ -72,6 +78,17 @@ public class HomePage extends AppCompatActivity {
 
     public void goToSelectPuzzleActivity(View view) {
         Intent intent = new Intent(this, SelectPuzzleActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToProfileActivity(View view) {
+        System.out.println("[HOMEPAGE] ***");
+        System.out.println(username);
+        System.out.println(email);
+
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 }

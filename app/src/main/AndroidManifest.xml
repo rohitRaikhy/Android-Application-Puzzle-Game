@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Puzzle_game">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".MessageActivity" />
         <activity android:name=".Register" />
         <activity android:name=".MessagingActivity" />
         <activity android:name=".login" />
         <activity android:name=".HomePage" />
-        <activity android:name=".PlayAgainActivity"/>
-        <activity android:name=".SelectPuzzleActivity"/>
-        <activity android:name=".PuzzleActivity"/>
-
+        <activity android:name=".PlayAgainActivity" />
+        <activity android:name=".SelectPuzzleActivity" />
+        <activity android:name=".PuzzleActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
