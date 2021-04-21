@@ -41,7 +41,7 @@ public class SelectPuzzleActivity extends AppCompatActivity {
                 Enemy enemy = new Enemy(new Cell(6,6, CellType.PLAYER_AVATAR));
                 enemies.add(enemy);
                 Puzzle puzzle = new Puzzle(1, board, player,enemies);
-                puzzle.setTraps(10);
+                puzzle.setTraps(15);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
             }
@@ -56,7 +56,7 @@ public class SelectPuzzleActivity extends AppCompatActivity {
                 enemies.add(enemy1);
                 enemies.add(enemy2);
                 Puzzle puzzle = new Puzzle(2, board, player, enemies);
-                puzzle.setTraps(10);
+                puzzle.setTraps(20);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
             }
@@ -69,7 +69,7 @@ public class SelectPuzzleActivity extends AppCompatActivity {
                 Enemy enemy = new Enemy(new Cell(10,10, CellType.PLAYER_AVATAR));
                 enemies.add(enemy);
                 Puzzle puzzle = new Puzzle(3, board, player,enemies);
-                puzzle.setTraps(45);
+                puzzle.setTraps(50);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
             }
