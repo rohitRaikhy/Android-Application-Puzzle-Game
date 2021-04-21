@@ -9,7 +9,7 @@ public class Puzzle implements Serializable {
     private int difficulty;
     private SquareBoard board;
     private Player player;
-    private Enemy enemy;
+    private List<Enemy> enemies;
     private Cell treasure;
     List<Cell> traps;
     private List<IStrategy> gameRules = new ArrayList<>();
@@ -19,11 +19,11 @@ public class Puzzle implements Serializable {
     int score;
 
 
-    public Puzzle(int difficulty, SquareBoard board, Player player, Enemy enemy) {
+    public Puzzle(int difficulty, SquareBoard board, Player player, List<Enemy> enemies) {
         this.difficulty = difficulty;
         this.board = board;
         this.player = player;
-        this.enemy = enemy;
+        this.enemies = enemies;
         traps = new ArrayList<>();
         bindPlayerToBoard();
         IStrategy orthoMove = new OrthogonalStrategy();
@@ -31,7 +31,10 @@ public class Puzzle implements Serializable {
         gameRules.add(orthoMove);
     }
 
-    public int getDifficulty() {return this.difficulty;}
+    public int getDifficulty() {
+        return this.difficulty;
+    }
+
     public SquareBoard getBoard() {
         return board;
     }
@@ -50,9 +53,9 @@ public class Puzzle implements Serializable {
 
     public void setTreasureRandomly() {
         Random rand = new Random(); //instance of random class
-        int upperBound = Math.round(board.getSideDim()/3);
-        int randX =  Math.round(board.getSideDim()/2) + rand.nextInt(upperBound) -1;
-        int randY =  Math.round(board.getSideDim()/2) + rand.nextInt(upperBound) -1;
+        int upperBound = Math.round(board.getSideDim() / 3);
+        int randX = Math.round(board.getSideDim() / 2) + rand.nextInt(upperBound) - 1;
+        int randY = Math.round(board.getSideDim() / 2) + rand.nextInt(upperBound) - 1;
         Cell treasure = new Cell(randX, randY, CellType.TREASURE);
         this.treasure = treasure;
         board.updateCell(treasure);
@@ -62,8 +65,8 @@ public class Puzzle implements Serializable {
         return player;
     }
 
-    public Enemy getEnemy() {
-        return enemy;
+    public List<Enemy> getEnemies() {
+        return enemies;
     }
 
     private void bindPlayerToBoard() {
@@ -95,7 +98,7 @@ public class Puzzle implements Serializable {
         return false;
     }
 
-    private void bindEnemyToBoard() {
+    private void bindEnemyToBoard(Enemy enemy) {
         Cell enemyLocation = enemy.currentLocation;
         board.updateCell(
                 new Cell(
@@ -105,17 +108,16 @@ public class Puzzle implements Serializable {
                 ));
     }
 
-    public boolean moveEnemy(Cell from, Cell to) {
+    public boolean moveEnemy(Enemy enemy, Cell from, Cell to) {
         if (enemyStrategy.canMove(board, from, to)) {
             enemy.setEnemyLocation(to);
-            bindEnemyToBoard();
+            bindEnemyToBoard(enemy);
             board.updateCell(
                     new Cell(
                             from.getX(),
                             from.getY(),
                             CellType.Empty
                     ));
-            return true;
         }
         return false;
     }
@@ -125,31 +127,34 @@ public class Puzzle implements Serializable {
     }
 
     public boolean isGameOver() {
-        int playerX = player.getPlayerLocation().getX();
-        int playerY = player.getPlayerLocation().getY();
-        int enemyX = enemy.getEnemyLocation().getX();
-        int enemyY = enemy.getEnemyLocation().getY();
-        int treasureX = treasure.getX();
-        int treasureY = treasure.getY();
-        if (Math.abs(playerX - enemyX) == 0 && Math.abs(playerY - enemyY) == 0) {
-            this.gameWon = false;
-            this.gameOver = true;
-            return true;
-        }
-        if (player.getStemina() <= 0) {
-            this.gameWon = false;
-            this.gameOver = true;
-            return true;
-        }
-        if (Math.abs(playerX - treasureX) == 0 && Math.abs(playerY - treasureY) == 0) {
-            this.gameWon = true;
-            this.gameOver = true;
-            return true;
+        for (Enemy enemy : enemies) {
+            int playerX = player.getPlayerLocation().getX();
+            int playerY = player.getPlayerLocation().getY();
+            int enemyX = enemy.getEnemyLocation().getX();
+            int enemyY = enemy.getEnemyLocation().getY();
+            int treasureX = treasure.getX();
+            int treasureY = treasure.getY();
+            if (Math.abs(playerX - enemyX) == 0 && Math.abs(playerY - enemyY) == 0) {
+                this.gameWon = false;
+                this.gameOver = true;
+                return true;
+            }
+            if (player.getStemina() <= 0) {
+                this.gameWon = false;
+                this.gameOver = true;
+                return true;
+            }
+            if (Math.abs(playerX - treasureX) == 0 && Math.abs(playerY - treasureY) == 0) {
+                this.gameWon = true;
+                this.gameOver = true;
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean getGameResult (){
+    public boolean getGameResult() {
         return gameWon;
     }
+
 }

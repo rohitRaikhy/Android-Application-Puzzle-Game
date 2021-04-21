@@ -6,6 +6,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.neu.madcourse.puzzle_game.Model.Game.Cell;
 import edu.neu.madcourse.puzzle_game.Model.Game.CellType;
 import edu.neu.madcourse.puzzle_game.Model.Game.Enemy;
@@ -34,8 +37,10 @@ public class SelectPuzzleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SquareBoard board = new SquareBoard( 8);
+                List<Enemy> enemies = new ArrayList<>();
                 Enemy enemy = new Enemy(new Cell(6,6, CellType.PLAYER_AVATAR));
-                Puzzle puzzle = new Puzzle(1, board, player,enemy);
+                enemies.add(enemy);
+                Puzzle puzzle = new Puzzle(1, board, player,enemies);
                 puzzle.setTraps(10);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
@@ -45,8 +50,12 @@ public class SelectPuzzleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SquareBoard board = new SquareBoard( 10);
-                Enemy enemy = new Enemy(new Cell(8,8, CellType.PLAYER_AVATAR));
-                Puzzle puzzle = new Puzzle(2, board, player,enemy);
+                List<Enemy> enemies = new ArrayList<>();
+                Enemy enemy1 = new Enemy(new Cell(0,8, CellType.PLAYER_AVATAR));
+                Enemy enemy2 = new Enemy(new Cell(8,8, CellType.PLAYER_AVATAR));
+                enemies.add(enemy1);
+                enemies.add(enemy2);
+                Puzzle puzzle = new Puzzle(2, board, player, enemies);
                 puzzle.setTraps(10);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
@@ -56,8 +65,10 @@ public class SelectPuzzleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SquareBoard board = new SquareBoard(12);
+                List<Enemy> enemies = new ArrayList<>();
                 Enemy enemy = new Enemy(new Cell(10,10, CellType.PLAYER_AVATAR));
-                Puzzle puzzle = new Puzzle(3, board, player,enemy);
+                enemies.add(enemy);
+                Puzzle puzzle = new Puzzle(3, board, player,enemies);
                 puzzle.setTraps(45);
                 puzzle.setTreasureRandomly();
                 goToPuzzleActivity(v, puzzle);
