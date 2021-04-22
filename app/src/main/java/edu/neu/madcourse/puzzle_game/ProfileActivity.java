@@ -116,5 +116,7 @@ public class ProfileActivity extends AppCompatActivity {
         String imageB64 = Base64.encodeToString(byteArray, Base64.URL_SAFE);
 
         dbRef.child("users").child(userID).child("profileBitmap").setValue(imageB64);
+
+        updateProfileViewData();
     }
 }
