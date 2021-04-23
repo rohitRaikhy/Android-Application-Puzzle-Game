@@ -56,6 +56,8 @@ public class MessagingActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         tabLayout = findViewById(R.id.tab_layout);
         viewpager = findViewById(R.id.view_pager);
+
+        mAuth = FirebaseAuth.getInstance();
         /**
          * check to see if username is null, if null then use username/email otherwise use
          * third party auth service.
@@ -63,6 +65,9 @@ public class MessagingActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("username") != null) {
             username.setText(getIntent().getStringExtra("username"));
         } else {
+            if (firebaseUser == null)
+                return;
+
             String userId = firebaseUser.getUid();
             // Change the username of the icon.
             FirebaseDatabase.getInstance().getReference().child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -140,11 +145,11 @@ public class MessagingActivity extends AppCompatActivity {
     /**
      * Todo: this does not work yet. Showing errors in the console.
      */
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mAuth.signOut();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        mAuth.signOut();
+//    }
 
     /**
      * adapter for the page adapter to swap between users and messages.
