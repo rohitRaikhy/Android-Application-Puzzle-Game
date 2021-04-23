@@ -1,7 +1,10 @@
 package edu.neu.madcourse.puzzle_game;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -95,10 +98,20 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 GameUser user = snapshot.getValue(GameUser.class);
                 username.setText(user.getUsername());
-                if (user.getImageUrl().equals("default")) {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
-                }
-                readMessages(fUser.getUid(), userid, user.getImageUrl());
+//                if (user.getProfileBitmap().equals("default")) {
+//                    profileImage.setImageResource(R.mipmap.ic_launcher);
+//                }
+
+                String stringEncoded = user.getProfileBitmap();
+                if (stringEncoded == null)
+                    return;
+
+                byte[] bytes = Base64.decode(stringEncoded, Base64.URL_SAFE);
+                Bitmap profileBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                profileImage.setImageBitmap(profileBitmap);
+
+                readMessages(fUser.getUid(), userid, user.getProfileBitmap());
             }
 
             @Override
