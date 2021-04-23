@@ -1,6 +1,9 @@
 package edu.neu.madcourse.puzzle_game;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -78,9 +81,31 @@ public class MessagingActivity extends AppCompatActivity {
          * check to see if profile pic is null
          */
         if (getIntent().getStringExtra("profilePic") == null) {
-            profileImage.setImageResource(R.mipmap.ic_launcher);
-        }
+//            profileImage.setImageResource(R.mipmap.ic_launcher);
 
+            FirebaseDatabase.getInstance().getReference().child("users").child(firebaseUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    } else {
+                        // Decode string -> bitmap
+                        Object obj = task.getResult().child("profileBitmap").getValue();
+                        if (obj == null)
+                            return;
+
+                        String stringEncoded = obj.toString();
+                        if (stringEncoded == null)
+                            return;
+
+                        byte[] bytes = Base64.decode(stringEncoded, Base64.URL_SAFE);
+                        Bitmap profileBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                        profileImage.setImageBitmap(profileBitmap);
+                    }
+                }
+            });
+        }
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragments(new ChatFeatureFragment(), "chats");

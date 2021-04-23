@@ -5,18 +5,18 @@ public class GameUser {
     private String username;
     private String email;
     private String id;
-    private String imageUrl;
+    private String profileBitmap;
 
     /**
      * Constructor to make the GameUser.
      *
-     * @param imageUrl String imageUrl profile photo.
+     * @param profileBitmap String profileBitmap profile photo.
      * @param id       String id of the user.
      * @param email    String email of the user.
      * @param username String username of the user.
      */
-    public GameUser(String imageUrl, String id, String email, String username) {
-        this.imageUrl = imageUrl;
+    public GameUser(String profileBitmap, String id, String email, String username) {
+        this.profileBitmap = profileBitmap;
         this.id = id;
         this.email = email;
         this.username = username;
@@ -66,8 +66,8 @@ public class GameUser {
      *
      * @return image url profile photo of user.
      */
-    public String getImageUrl() {
-        return imageUrl;
+    public String getProfileBitmap() {
+        return profileBitmap;
     }
 
     /**
@@ -92,6 +92,6 @@ public class GameUser {
      * sets the image url of the user.
      */
     public void setImageUrl() {
-        this.imageUrl = imageUrl;
+        this.profileBitmap = profileBitmap;
     }
 }

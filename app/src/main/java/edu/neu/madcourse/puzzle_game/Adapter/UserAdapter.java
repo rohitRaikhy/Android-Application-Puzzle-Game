@@ -2,6 +2,9 @@ package edu.neu.madcourse.puzzle_game.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +47,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameUser user = mUsers.get(position);
         holder.username.setText(user.getUsername());
-        if (user.getImageUrl().equals("default")) {
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        }
+
+//        if (user.getImageUrl().equals("default")) {
+//            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+//        }
+
+        // Decode string -> bitmap
+        String stringEncoded = user.getProfileBitmap();
+        if (stringEncoded == null)
+            return;
+
+        byte[] bytes = Base64.decode(stringEncoded, Base64.URL_SAFE);
+        Bitmap profileBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+        holder.profile_image.setImageBitmap(profileBitmap);
+
         //TODO: add the glide package to load image url of signed in user.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
