@@ -41,19 +41,19 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         emailText = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
-        signIn = findViewById(R.id.sign_in_button);
+//        signIn = findViewById(R.id.sign_in_button);
         loginButton = findViewById(R.id.loginButton);
-        signIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.sign_in_button:
-                        signIn();
-                        break;
-                    // ...
-                }
-            }
-        });
+//        signIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                switch (view.getId()) {
+//                    case R.id.sign_in_button:
+//                        signIn();
+//                        break;
+//                    // ...
+//                }
+//            }
+//        });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();

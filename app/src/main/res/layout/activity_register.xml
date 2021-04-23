@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/dungeon"
     android:layout_height="match_parent"
 
     tools:context=".Register">
@@ -15,6 +16,7 @@
 
         <TextView
             android:id="@+id/textView3"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/createAccount"
@@ -25,6 +27,8 @@
             android:id="@+id/usernameRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/username"
@@ -34,6 +38,8 @@
             android:id="@+id/emailRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/email"
@@ -43,6 +49,8 @@
             android:id="@+id/passwordRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/password"
