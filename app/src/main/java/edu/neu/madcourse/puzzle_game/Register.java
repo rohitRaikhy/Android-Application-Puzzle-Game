@@ -1,10 +1,16 @@
 package edu.neu.madcourse.puzzle_game;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 public class Register extends AppCompatActivity {
 
@@ -75,8 +83,18 @@ public class Register extends AppCompatActivity {
                                     .child("email").setValue(email);
                             FirebaseDatabase.getInstance().getReference().child("users").child(task.getResult().getUser().getUid())
                                     .child("username").setValue(username);
+
+                            // Load default pic
+                            ImageView imageView = findViewById(R.id.testImg);
+                            Bitmap profileBitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+                            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                            profileBitmap.compress(Bitmap.CompressFormat.PNG, 100, bao); // bmp is bitmap from user image file
+                            profileBitmap.recycle();
+                            byte[] byteArray = bao.toByteArray();
+                            String imageB64 = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+
                             FirebaseDatabase.getInstance().getReference().child("users").child(task.getResult().getUser().getUid())
-                                    .child("imageUrl").setValue("default");
+                                    .child("profileBitmap").setValue(imageB64);
 
                             login();
 
