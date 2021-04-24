@@ -9,11 +9,11 @@ Opening the app users have the option to either login or register.
 
 This is the wireframe for the login page.
 
-![Screen Shot 2021-04-20 at 10 55 47 PM](https://user-images.githubusercontent.com/35156624/115468834-8eeb2280-a22b-11eb-8c85-809ede46b017.png)
+![Screen Shot 2021-04-24 at 1 49 49 PM](https://user-images.githubusercontent.com/35156624/115959388-f216d680-a503-11eb-8939-7a80accc17d3.png)
 
 This is the wireframe for the registration page.
 
-![Screen Shot 2021-04-20 at 10 56 32 PM](https://user-images.githubusercontent.com/35156624/115468902-a88c6a00-a22b-11eb-887d-00c190f70488.png)
+![Screen Shot 2021-04-24 at 1 50 06 PM](https://user-images.githubusercontent.com/35156624/115959397-fb07a800-a503-11eb-8fa6-39c7d8ba1190.png)
 
 
 After logging in the main menu appears. A user can play a game, check their profile, or message other users.
@@ -29,6 +29,7 @@ Users have the ability to chat with each other through the messaging service.
 
 
 ![Screen Shot 2021-04-20 at 11 13 43 PM](https://user-images.githubusercontent.com/35156624/115470340-0e79f100-a22e-11eb-97d4-05eba7d931de.png)
+
 
 
 
