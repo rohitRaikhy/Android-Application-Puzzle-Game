@@ -57,21 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/sign_in_button"-->
-<!--        android:layout_width="210dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginStart="100dp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:layout_marginEnd="100dp"-->
-<!--        android:layout_marginBottom="240dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/loginButton"-->
-<!--        tools:ignore="MissingConstraints" />-->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
