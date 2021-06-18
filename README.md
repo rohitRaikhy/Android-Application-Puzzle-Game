@@ -1,4 +1,4 @@
-# Escape
+# Escape Puzzle Game
 Our game is a single-player board game that includes fantasy elements. At each level, the game will initiate our hero at the bottom of the board, and the hero’s objective is to reach the treasure chest, which is placed somewhere at the top of the screen. The hero will use various tactics to achieve his goal and will be tested on their ability to avoid traps and optimize stamina along their way to the treasure chest. As the hero clears the current level, they will move on to a more difficult level.
 
 **Screenshots**
